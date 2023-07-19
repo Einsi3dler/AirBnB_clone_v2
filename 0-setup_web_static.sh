@@ -14,7 +14,7 @@ fi
 #sudo ufw allow 'Nginx HTTP'
 
 #create dir if not existing / do nothing if existing
-for dir in data/web_static/{shared,releases/test}; do
+for dir in /data/web_static/{shared,releases/test}; do
     sudo mkdir -p "$dir"
 done
 
@@ -26,9 +26,9 @@ echo "<!DOCTYPE html>
   <body>
     Holberton School
   </body>
-</html>" | sudo tee data/web_static/releases/test/index.html
+</html>" | sudo tee /data/web_static/releases/test/index.html
 #creates a symbolic link
-sudo ln -sf  data/web_static/releases/test /data/web_static/current
+sudo ln -sf  /data/web_static/releases/test /data/web_static/current
 
 #give folder ownership to ubuntu
 sudo chown -hR ubuntu:ubuntu /data/
