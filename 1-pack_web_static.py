@@ -3,7 +3,7 @@
 and distribute it on env.host servers'''
 
 from fabric.api import local
-from datetime import datetime
+from datetime import datetime as ti
 import os
 
 
@@ -14,8 +14,9 @@ def do_pack():
     """
     if not os.path.isdir("versions"):
         os.mkdir("versions")
-    path = 'versions/web_static_' + datetime.now().\
-        strftime('%Y%m%d%H%M%S') + '.tgz'
+    time = ti.now()
+    path = "versions/web_static_{}.tgz".format(
+            dt.strftime(time, "%Y%m%d%H%M%S"))
     try:
         local("tar -cvzf {} web_static".format(path))
         archize_size = os.stat(path).st_size
