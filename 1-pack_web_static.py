@@ -3,29 +3,21 @@
 and distribute it on env.host servers'''
 
 from fabric.api import local
-from datetime import datetime as dt
+from datetime import datetime
 import os
 
 
 def do_pack():
-    """Distributes an archive to a web server.
-    Args:
-        archive_path (str): The path of the archive to distribute.
-    Returns:
-        If the file doesn't exist at archive_path or an error occurs - False.
-        Otherwise - True.
+    """ Packs all the content of the webstatic 
+	folder into a tgz compressed archive
     """
     if not os.path.isdir("versions"):
         os.mkdir("versions")
-    cur_time = dt.now()
-    output_path = "versions/web_static_{}.tgz".format(
-            dt.strftime(cur_time, "%Y%m%d%H%M%S"))
+    path = 'versions/web_static_' + datetime.now().\
+                   strftime('%Y%m%d%H%M%S') + '.tgz'
     try:
-        print("Packing web_static to {}".format(output_path))
-        local("tar -cvzf {} web_static".format(output_path))
-        archize_size = os.stat(output_path).st_size
-        print("web_static packed: {} -> {} Bytes"
-              .format(output_path, archize_size))
+        local("tar -cvzf {} web_static".format(path))
+        archize_size = os.stat(path).st_size
     except Exception:
-        output_path = None
-    return output_path
+        path = None
+    return path
