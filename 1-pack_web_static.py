@@ -1,23 +1,25 @@
 #!/usr/bin/python3
-"""This module contains a script that generates a .tgz archive from the
-contents of the web_static folder of AirBnB Clone v2, using the
-function do_pack.
 """
-from fabric.api import local
-from datetime import datetime
+This script creates a tgz archive of the contents of web_static
+"""
+from fabric.api import *
 import os
+from datetime import datetime
+
+env.hosts = ['localhost']
 
 
 def do_pack():
-    """This function generates a .tgz archive from the contents of the
-    web_static folder of AirBnB Clone v2, using the function do_pack.
-    """
+    '''
+    This method is an inbuilt method responsible for said archive
+    '''
     try:
-        if not os.path.exists('versions'):
-            local('mkdir versions')
-        date = datetime.now().strftime("%Y%m%d%H%M%S")
-        file_name = "versions/web_static_{}.tgz".format(date)
-        local("tar -cvzf {} ./web_static".format(file_name))
-        return file_name
+        filepath = 'versions/web_static_' + datetime.now().\
+                   strftime('%Y%m%d%H%M%S') + '.tgz'
+        local('mkdir -p versions')
+        local('tar -zcvf versions/web_static_$(date +%Y%m%d%H%M%S).tgz\
+        web_static')
+        print('web_static packed: {} -> {}'.
+              format(filepath, os.path.getsize(filepath)))
     except Exception:
         return None
