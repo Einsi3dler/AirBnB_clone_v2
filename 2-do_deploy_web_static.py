@@ -6,10 +6,6 @@ from datetime import datetime as dt
 from fabric.api import run, env, put
 from os import path
 
-
-env.hosts = ['34.224.3.244', '100.25.152.35']
-
-
 def do_deploy(archive_path):
     """Deploys the static files to the host servers.
     Args:
@@ -20,7 +16,7 @@ def do_deploy(archive_path):
     file_name = path.basename(archive_path)
     folder_name = file_name.replace(".tgz", "")
     folder_path = "/data/web_static/releases/{}/".format(folder_name)
-    success = False
+    Mode = False
     try:
         put(archive_path, "/tmp/{}".format(file_name))
         run("mkdir -p {}".format(folder_path))
@@ -31,7 +27,7 @@ def do_deploy(archive_path):
         run("rm -rf /data/web_static/current")
         run("ln -s {} /data/web_static/current".format(folder_path))
         print('New version deployed!')
-        success = True
+        Mode = True
     except Exception:
-        success = False
-    return success
+        Mode = False
+    return Mode
