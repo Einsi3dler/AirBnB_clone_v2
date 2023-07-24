@@ -7,7 +7,7 @@ where n is an input from user
 import os
 from fabric.api import lcd, local, run, env, cd
 
-env.hosts = ['52.86.83.227', '100.24.237.214']
+env.hosts = ['100.25.152.35', '34.224.3.244']
 
 
 def do_clean(number=0):
