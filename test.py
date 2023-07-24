@@ -2,6 +2,7 @@ from fabric.api import task, env, put
 import os
 
 # Define the IP address of your web server
+env.user = "ubuntu"
 env.hosts = ["34.224.3.244"]
 
 @task
