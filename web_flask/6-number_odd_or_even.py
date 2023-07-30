@@ -53,20 +53,8 @@ def number(num):
 def html_num(num):
     """
     This returns a html file that contains the number
-    """
-    val = f"""<!DOCTYPE html>
-<HTML lang="en">
-    <HEAD>
-        <TITLE>HBNB</TITLE>
-    </HEAD>
-    <BODY>
-        <H1>Number: {num}</H1>
-    </BODY>
-</HTML>"""
-    with open("templates/5-number.html", "w") as f:
-        f.write(val)
-    
-    return render_template('5-number.html')
+    """ 
+    return render_template('5-number.html', num=num)
 
 
 @app.route('/number_odd_or_even/<int:num>', strict_slashes=False)
@@ -78,19 +66,7 @@ def html_EorO(num):
     if num % 2 == 0:
         num_type = "even"
 
-    val = f"""<!DOCTYPE html>
-<HTML lang="en">
-    <HEAD>
-        <TITLE>HBNB</TITLE>
-    </HEAD>
-    <BODY>
-        <H1>Number: {num} is {num_type}</H1>
-    </BODY>
-</HTML>"""
-    with open("templates/6-number_odd_or_even.html", "w") as f:
-        f.write(val)
-
-    return render_template('6-number_odd_or_even.html')
+    return render_template('6-number_odd_or_even.html', num=num, num_type=num_type)
 
 
 if __name__ == "__main__":

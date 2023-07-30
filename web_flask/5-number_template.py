@@ -54,20 +54,7 @@ def html_num(num):
     """
     This returns a html file that contains the number
     """
-    val = f"""<!DOCTYPE html>
-<HTML lang="en">
-    <HEAD>
-        <TITLE>HBNB</TITLE>
-    </HEAD>
-    <BODY>
-        <H1>Number: {num}</H1>
-    </BODY>
-</HTML>"""
-    with open("templates/5-number.html", "w") as f:
-        f.write(val)
-    
-    return render_template('5-number.html')
-
+    return render_template('5-number.html', num=num)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port='5000')
